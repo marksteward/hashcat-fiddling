@@ -18,7 +18,7 @@ static const u32   DGST_POS2      = 6;
 static const u32   DGST_POS3      = 7;
 static const u32   DGST_SIZE      = DGST_SIZE_8_8;
 static const u32   HASH_CATEGORY  = HASH_CATEGORY_RAW_HASH_SALTED;
-static const char *HASH_NAME      = "sha512($salt.$pass)";
+static const char *HASH_NAME      = "sha512($salt.$pass.$salt)";
 static const u64   KERN_TYPE      = 1720;
 static const u32   OPTI_TYPE      = OPTI_TYPE_ZERO_BYTE
                                   | OPTI_TYPE_PRECOMPUTE_INIT
@@ -32,7 +32,7 @@ static const u64   OPTS_TYPE      = OPTS_TYPE_PT_GENERATE_BE
                                   | OPTS_TYPE_PT_ADDBITS15;
 static const u32   SALT_TYPE      = SALT_TYPE_GENERIC;
 static const char *ST_PASS        = "hashcat";
-static const char *ST_HASH        = "efc5dd0e4145970917abdc311e1d4e23ba0afa9426d960cb28569f4d585cb031af5c936f57fbcb0a08368a1b302573cf582100d40bd7c632f3d8aecd1a1a8eb1:812";
+static const char *ST_HASH        = "b9416027850360da41089cde5c175d817c42678568f11ab41806a44da2c1aa9e315c5bf8b4c93d44e2c8dd7c72892e6251acb8cde85dbf88cb46a0725a5f37b3:812";
 
 u32         module_attack_exec    (MAYBE_UNUSED const hashconfig_t *hashconfig, MAYBE_UNUSED const user_options_t *user_options, MAYBE_UNUSED const user_options_extra_t *user_options_extra) { return ATTACK_EXEC;     }
 u32         module_dgst_pos0      (MAYBE_UNUSED const hashconfig_t *hashconfig, MAYBE_UNUSED const user_options_t *user_options, MAYBE_UNUSED const user_options_extra_t *user_options_extra) { return DGST_POS0;       }

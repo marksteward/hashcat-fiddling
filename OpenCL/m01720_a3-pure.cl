@@ -37,6 +37,15 @@ __kernel void m01720_mxx (KERN_ATTR_VECTOR ())
     w[idx] = pws[gid].i[idx];
   }
 
+  const u32 salt_len = salt_bufs[salt_pos].salt_len;
+
+  u32x s[64] = { 0 };
+
+  for (int i = 0, idx = 0; i < salt_len; i += 4, idx += 1)
+  {
+    s[idx] = swap32_S (salt_bufs[salt_pos].salt_buf[idx]);
+  }
+
   sha512_ctx_t ctx0;
 
   sha512_init (&ctx0);
@@ -62,6 +71,8 @@ __kernel void m01720_mxx (KERN_ATTR_VECTOR ())
     sha512_init_vector_from_scalar (&ctx, &ctx0);
 
     sha512_update_vector (&ctx, w, pw_len);
+
+    sha512_update_vector (&ctx, s, salt_len);
 
     sha512_final_vector (&ctx);
 
@@ -110,6 +121,15 @@ __kernel void m01720_sxx (KERN_ATTR_VECTOR ())
     w[idx] = pws[gid].i[idx];
   }
 
+  const u32 salt_len = salt_bufs[salt_pos].salt_len;
+
+  u32x s[64] = { 0 };
+
+  for (int i = 0, idx = 0; i < salt_len; i += 4, idx += 1)
+  {
+    s[idx] = swap32_S (salt_bufs[salt_pos].salt_buf[idx]);
+  }
+
   sha512_ctx_t ctx0;
 
   sha512_init (&ctx0);
@@ -135,6 +155,8 @@ __kernel void m01720_sxx (KERN_ATTR_VECTOR ())
     sha512_init_vector_from_scalar (&ctx, &ctx0);
 
     sha512_update_vector (&ctx, w, pw_len);
+
+    sha512_update_vector (&ctx, s, salt_len);
 
     sha512_final_vector (&ctx);
 
